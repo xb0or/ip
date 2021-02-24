@@ -20,13 +20,13 @@ chmod +x wgcf
 
 
 if ls -l wgcf-profile.conf;then
-    echo"注册成功"
+    echo "注册成功"
 else
-    echo"warp注册失败"
-    echo"请进入netflxjs文件夹 输入"
-    echo"./wgcf register"
-    echo"./wgcf generate"
-    echo"来获取warp的wg文件"
+    echo "warp注册失败"
+    echo "请进入netflxjs文件夹 输入"
+    echo "./wgcf register"
+    echo "./wgcf generate"
+    echo "来获取warp的wg文件"
     exit
 fi
 
