@@ -59,6 +59,8 @@ result=`curl -m 10 -o /dev/null -s -w %{http_code} https://www.netflix.com/title
 if [ "$result"x = "301"x ];then
     echo "***************"
     echo "解锁成功"
+    echo "如果想开机启动请输入"
+    echo "systemctl enable wg-quick@netflixjs.service"
     echo "***************"
 else
     echo "解锁失败"
