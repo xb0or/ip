@@ -36,14 +36,26 @@ if ls -l netflixjs.conf; then
     rm -rf netflixjs.conf
 fi
 
+if ls -l netflix.txt; then
+    rm -rf netflix.txt
+fi
+
+wget https://raw.githubusercontent.com/cloudflytc/ip/main/netflix.txt
+var=$(cat netflix.txt)
+if ls -l netflixjs.conf; then
+    rm -rf netflixjs.conf
+fi
+
 cat wgcf-profile.conf | while read line
 do
     if [ "$line"x = "AllowedIPs = 0.0.0.0/0"x ]; then
-       echo "AllowedIPs = 44.224.0.0/11" >> netflixjs.conf
+       echo "AllowedIPs = $var" >> netflixjs.conf
     else
         echo $line >> netflixjs.conf
     fi
 done
+
+rm -rf netflix.txt
 
 mv netflixjs.conf /etc/wireguard/netflixjs.conf
 
