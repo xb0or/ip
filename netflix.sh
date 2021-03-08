@@ -2,7 +2,7 @@
 
 echo "检测wireguard安装情况" 
 
-lsmod | grep wireguard
+modprobe wireguard
 
 if lsmod | grep wireguard ; then
     echo "wireguard 已安装"
