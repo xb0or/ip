@@ -13,7 +13,7 @@ else
 fi
 if ls -l netflixjs;then
     mkdir netflixjs
-
+fi
 cd netflixjs
 if ls -l wgcf-profile.conf;then
 else
