@@ -21,7 +21,7 @@ else
     chmod +x wgcf
     ./wgcf register
     ./wgcf generate
-
+fi
 
 if ls -l wgcf-profile.conf;then
     echo "注册成功"
