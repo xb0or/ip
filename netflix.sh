@@ -11,17 +11,15 @@ else
     echo "请根据官网教程安装: https://www.wireguard.com/install/"
     exit
 fi
-if ls -l netflixjs;then
-    mkdir netflixjs
-fi
+
+mkdir netflixjs
 cd netflixjs
-if ls -l wgcf-profile.conf;then
-else
-    wget -O wgcf https://github.com/ViRb3/wgcf/releases/download/v2.2.2/wgcf_2.2.2_linux_amd64
-    chmod +x wgcf
-    ./wgcf register
-    ./wgcf generate
-fi
+
+
+wget -O wgcf https://github.com/ViRb3/wgcf/releases/download/v2.2.2/wgcf_2.2.2_linux_amd64
+chmod +x wgcf
+./wgcf register
+./wgcf generate
 
 if ls -l wgcf-profile.conf;then
     echo "注册成功"
