@@ -324,7 +324,7 @@ echo "nohup gost -L=rudp://:$v2ray_port_really/127.0.0.1:$v2ray_port?ttl=60s &" 
 
 
 
-ss="ss://$(echo -n "${ssciphers}:${sspass}@${ip}:${ssport_really}" | base64 -w 0)#233v2.com_ss_${ip}"
+ss="ss://$(echo -n "${ssciphers}:${sspass}@${ip}:${ssport_really}" | base64 -w 0)#ss_${ip}"
 json="{\"v\": \"2\",\"ps\": \"\",\"add\": \"${ip}\",\"port\": \"$v2ray_port_really\",\"id\": \"$uuid\",\"aid\": \"0\",\"net\": \"ws\",\"type\": \"none\",\"host\": \"\",\"path\": \"\",\"tls\": \"\"}"
 
 v2ray="vmess://$(echo -n "${json}" | base64 -w 0)"
