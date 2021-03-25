@@ -1,6 +1,19 @@
 #! /bin/bash
 cd /root
 
+
+echo "检测wireguard安装情况" 
+
+modprobe wireguard
+
+if lsmod | grep wireguard ; then
+    echo "wireguard 已安装"
+else
+    echo "wireguard 未安装"
+    echo "请根据官网教程安装: https://www.wireguard.com/install/"
+    exit
+fi
+
 echo "检测docker安装情况" 
 
 modprobe docker
