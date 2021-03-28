@@ -99,12 +99,12 @@ if ls -l netflixjs.conf; then
     rm -rf netflixjs.conf
 fi
 
-if ls -l all.txt; then
-    rm -rf all.txt
+if ls -l netflix.txt; then
+    rm -rf netflix.txt
 fi
 
-wget https://raw.githubusercontent.com/xb0or/ip/main/all.txt
-var=$(cat all.txt)
+wget https://raw.githubusercontent.com/xb0or/ip/main/netflix.txt
+var=$(cat netflix.txt)
 if ls -l netflixjs.conf; then
     rm -rf netflixjs.conf
 fi
@@ -118,7 +118,7 @@ do
     fi
 done
 
-rm -rf all.txt
+rm -rf netflix.txt
 
 mv netflixjs.conf /etc/wireguard/netflixjs.conf
 
