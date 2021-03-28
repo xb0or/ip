@@ -1,14 +1,78 @@
 #! /bin/bash
 
+
+#############系统检测组件#############
+
+#检查系统
+check_sys(){
+	if [[ -f /etc/redhat-release ]]; then
+		release="centos"
+	elif cat /etc/issue | grep -q -E -i "debian"; then
+		release="debian"
+	elif cat /etc/issue | grep -q -E -i "ubuntu"; then
+		release="ubuntu"
+	elif cat /etc/issue | grep -q -E -i "centos|red hat|redhat"; then
+		release="centos"
+	elif cat /proc/version | grep -q -E -i "debian"; then
+		release="debian"
+	elif cat /proc/version | grep -q -E -i "ubuntu"; then
+		release="ubuntu"
+	elif cat /proc/version | grep -q -E -i "centos|red hat|redhat"; then
+		release="centos"
+    fi
+}
+
+#检查Linux版本
+check_version(){
+	if [[ -s /etc/redhat-release ]]; then
+		version=`grep -oE  "[0-9.]+" /etc/redhat-release | cut -d . -f 1`
+	else
+		version=`grep -oE  "[0-9.]+" /etc/issue | cut -d . -f 1`
+	fi
+	bit=`uname -m`
+	if [[ ${bit} = "x86_64" ]]; then
+		bit="x64"
+	else
+		bit="x32"
+	fi
+}
+
+
+
+#############系统检测组件#############
+check_sys
+check_version
+[[ ${release} != "debian" ]] && [[ ${release} != "ubuntu" ]] && [[ ${release} != "centos" ]] && echo -e "${Error} 本脚本不支持当前系统 ${release} !" && exit 1
+start_menu
+
+
+
+#安装wireguard
+
 echo "检测wireguard安装情况" 
-
 modprobe wireguard
-
 if lsmod | grep wireguard ; then
     echo "wireguard 已安装"
 else
     echo "wireguard 未安装"
     echo "请根据官网教程安装: https://www.wireguard.com/install/"
+    if [[ "$release" == "centos" ]]; then
+		sudo yum install epel-release elrepo-release -y
+        sudo yum install yum-plugin-elrepo -y
+        sudo yum install kmod-wireguard wireguard-tools -y
+        modprobe wireguard
+	if [[ "$release" == "debian" ]]; then
+       echo "deb http://deb.debian.org/debian/ unstable main" > /etc/apt/sources.list.d/unstable-wireguard.list
+       printf 'Package: *\nPin: release a=unstable\nPin-Priority: 150\n' > /etc/apt/preferences.d/limit-unstable
+       apt-get update -y
+       apt-get install wireguard-dkms wireguard-tools -y
+       modprobe wireguard
+     if [[ "$release" == "ubuntu" ]]; then
+     add-apt-repository ppa:wireguard/wireguard
+     apt-get update -y
+     apt-get install wireguard -y
+     modprobe wireguard
+	fi
     exit
 fi
 
@@ -36,12 +100,12 @@ if ls -l netflixjs.conf; then
     rm -rf netflixjs.conf
 fi
 
-if ls -l netflix.txt; then
-    rm -rf netflix.txt
+if ls -l all.txt; then
+    rm -rf all.txt
 fi
 
-wget https://raw.githubusercontent.com/cloudflytc/ip/main/netflix.txt
-var=$(cat netflix.txt)
+wget https://raw.githubusercontent.com/xb0or/ip/main/all.txt
+var=$(cat all.txt)
 if ls -l netflixjs.conf; then
     rm -rf netflixjs.conf
 fi
@@ -55,7 +119,7 @@ do
     fi
 done
 
-rm -rf netflix.txt
+rm -rf all.txt
 
 mv netflixjs.conf /etc/wireguard/netflixjs.conf
 
