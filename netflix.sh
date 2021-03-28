@@ -43,7 +43,6 @@ check_version(){
 check_sys
 check_version
 [[ ${release} != "debian" ]] && [[ ${release} != "ubuntu" ]] && [[ ${release} != "centos" ]] && echo -e "${Error} 本脚本不支持当前系统 ${release} !" && exit 1
-start_menu
 
 
 
@@ -61,13 +60,13 @@ else
         sudo yum install yum-plugin-elrepo -y
         sudo yum install kmod-wireguard wireguard-tools -y
         modprobe wireguard
-	if [[ "$release" == "debian" ]]; then
+	elif [[ "$release" == "debian" ]]; then
        echo "deb http://deb.debian.org/debian/ unstable main" > /etc/apt/sources.list.d/unstable-wireguard.list
        printf 'Package: *\nPin: release a=unstable\nPin-Priority: 150\n' > /etc/apt/preferences.d/limit-unstable
        apt-get update -y
        apt-get install wireguard-dkms wireguard-tools -y
        modprobe wireguard
-     if [[ "$release" == "ubuntu" ]]; then
+     elif [[ "$release" == "ubuntu" ]]; then
      add-apt-repository ppa:wireguard/wireguard
      apt-get update -y
      apt-get install wireguard -y
