@@ -66,11 +66,13 @@ else
        apt-get update -y
        apt-get install wireguard-dkms wireguard-tools -y
        modprobe wireguard
+       ln -s /usr/bin/resolvectl /usr/local/bin/resolvconf
      elif [[ "$release" == "ubuntu" ]]; then
      add-apt-repository ppa:wireguard/wireguard
      apt-get update -y
      apt-get install wireguard -y
      modprobe wireguard
+     ln -s /usr/bin/resolvectl /usr/local/bin/resolvconf
 	fi
     exit
 fi
