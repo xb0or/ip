@@ -60,19 +60,24 @@ else
         sudo yum install yum-plugin-elrepo -y
         sudo yum install kmod-wireguard wireguard-tools -y
         modprobe wireguard
-	elif [[ "$release" == "debian" ]]; then
+    elif [[ "$release" == "debian" ]]; then
+       apt-get install sudo net-tools openresolv -y
+       #Debian添加unstable源
        echo "deb http://deb.debian.org/debian/ unstable main" > /etc/apt/sources.list.d/unstable-wireguard.list
        printf 'Package: *\nPin: release a=unstable\nPin-Priority: 150\n' > /etc/apt/preferences.d/limit-unstable
-       apt-get update -y
-       apt-get install wireguard-dkms wireguard-tools -y
+       #更新源并安装
+       apt-get update
+       apt-get install wireguard-dkms wireguard-tools
        modprobe wireguard
-       ln -s /usr/bin/resolvectl /usr/local/bin/resolvconf
-     elif [[ "$release" == "ubuntu" ]]; then
-     add-apt-repository ppa:wireguard/wireguard
-     apt-get update -y
-     apt-get install wireguard -y
+      # ln -s /usr/bin/resolvectl /usr/local/bin/resolvconf
+    elif [[ "$release" == "ubuntu" ]]; then
+      #Ubuntu添加库
+      add-apt-repository ppa:wireguard/wireguard
+      #更新源并安装
+      apt-get update
+      apt-get install wireguard
      modprobe wireguard
-     ln -s /usr/bin/resolvectl /usr/local/bin/resolvconf
+    # ln -s /usr/bin/resolvectl /usr/local/bin/resolvconf
 	fi
     exit
 fi
