@@ -102,20 +102,29 @@ else
     exit
 fi
 
-if ls -l netflixjs.conf; then
     rm -rf netflixjs.conf
-fi
-
-if ls -l netflix.txt; then
     rm -rf netflix.txt
-fi
 
-wget https://raw.githubusercontent.com/xb0or/ip/main/netflix.txt
-var=$(cat netflix.txt)
-if ls -l netflixjs.conf; then
-    rm -rf netflixjs.conf
-fi
 
+    echo && echo -e "选择解锁IP？
+1.Netflix
+2.YouTube
+3.All" && echo
+	read -e -p "(默认: 取消):" dsfghj
+	[[ -z "${dsfghj}" ]] && echo "已取消..." && exit 1
+	if [[ ${dsfghj} == "1" ]]; then
+		wget https://raw.githubusercontent.com/cloudflytc/ip/main/netflix.txt
+        var=$(cat netflix.txt)
+	elif [[ ${dsfghj} == "2" ]]; then
+		wget https://raw.githubusercontent.com/cloudflytc/ip/main/youtube.txt
+        var=$(cat youtube.txt)
+	elif [[ ${dsfghj} == "3" ]]; then
+        wget https://raw.githubusercontent.com/cloudflytc/ip/main/all.txt
+        var=$(cat all.txt)
+	else
+		echo -e "${Error} 请输入正确的数字(1-2)" && exit 1
+	fi
+rm -rf netflixjs.conf
 cat wgcf-profile.conf | while read line
 do
     if [ "$line"x = "AllowedIPs = 0.0.0.0/0"x ]; then
