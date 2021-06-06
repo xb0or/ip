@@ -113,14 +113,14 @@ fi
 	read -e -p "(默认: 取消):" dsfghj
 	[[ -z "${dsfghj}" ]] && echo "已取消..." && exit 1
 	if [[ ${dsfghj} == "1" ]]; then
-		wget https://raw.githubusercontent.com/cloudflytc/ip/main/netflix.txt
-        var=$(cat netflix.txt)
+		wget https://raw.githubusercontent.com/xb0or/ip/main/netflix.txt
+                var=$(cat netflix.txt)
 	elif [[ ${dsfghj} == "2" ]]; then
-		wget https://raw.githubusercontent.com/cloudflytc/ip/main/youtube.txt
-        var=$(cat youtube.txt)
+		wget https://raw.githubusercontent.com/xb0or/ip/main/youtube.txt
+                var=$(cat youtube.txt)
 	elif [[ ${dsfghj} == "3" ]]; then
-        wget https://raw.githubusercontent.com/cloudflytc/ip/main/all.txt
-        var=$(cat all.txt)
+            wget https://raw.githubusercontent.com/xb0or/ip/main/all.txt
+            var=$(cat all.txt)
 	else
 		echo -e "${Error} 请输入正确的数字(1-2)" && exit 1
 	fi
