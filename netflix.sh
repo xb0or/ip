@@ -88,7 +88,7 @@ cd netflixjs
 
 wget -O wgcf https://github.com/ViRb3/wgcf/releases/download/v2.2.2/wgcf_2.2.2_linux_amd64
 chmod +x wgcf
-./wgcf register
+echo | ./wgcf register
 ./wgcf generate
 
 if ls -l wgcf-profile.conf;then
