@@ -122,9 +122,12 @@ fi
             wget -O all.txt https://raw.githubusercontent.com/xb0or/ip/main/all.txt
             var=$(cat all.txt)
 	else
-		echo -e "${Error} 请输入正确的数字(1-2)" && exit 1
+		echo -e "${Error} 请输入正确的数字(1-3)" && exit 1
 	fi
-rm -rf netflixjs.conf
+if ls -l netflixjs.conf; then
+    rm -rf netflixjs.conf
+fi
+
 cat wgcf-profile.conf | while read line
 do
     if [ "$line"x = "AllowedIPs = 0.0.0.0/0"x ]; then
